@@ -3,7 +3,7 @@
 **MSSV:** 24520131  | **Họ tên:** Trang Tuấn Anh | **Lớp:** NT547.R11.ANTT
 **Session code tự sinh:** SC-3EE792 | **Tên contract:** LotteryHub_0131
 **Solidity / Slither:** 0.8.24 / 0.11.6 | **Ngày hoàn thành:** 2026-11-20
-**URL GitHub repository:** `<ĐIỀN_URL_REPO_GITHUB_CỦA_BẠN>`
+**URL GitHub repository:** https://github.com/TrangTuanAnh/NT547-Lab06-24520131
 
 ---
 
@@ -212,8 +212,8 @@ StudentAsset → BalanceLedger  [label="2"]
 
 | Phase | Commit (full/short SHA) | Run URL | Kết quả | Detector khiến RED / lý do GREEN |
 |---|---|---|---|---|
-| Baseline vulnerable | `<ĐIỀN_SHA_COMMIT_1>` | `<ĐIỀN_URL_RUN_1>` | **RED** | `encode-packed-collision` (High), `uninitialized-state` (High), `divide-before-multiply` (Medium), `incorrect-equality` (Medium), `tx-origin` (Medium) |
-| Patched | `<ĐIỀN_SHA_COMMIT_2>` | `<ĐIỀN_URL_RUN_2>` | **GREEN** | Đã sửa 4 TP (tx-origin, encode-packed, divide-before-multiply, uninitialized-state) + suppress incorrect-equality → 0 High, 0 Medium → pass gate `fail-on: medium` |
+| Baseline vulnerable | `f120d18` | `📸 ĐIỀN URL RUN 1` | **RED** | `encode-packed-collision` (High), `uninitialized-state` (High), `divide-before-multiply` (Medium), `incorrect-equality` (Medium), `tx-origin` (Medium) |
+| Patched | `ee5caa8` | `📸 ĐIỀN URL RUN 2` | **GREEN** | Đã sửa 4 TP (tx-origin, encode-packed, divide-before-multiply, uninitialized-state) + suppress incorrect-equality → 0 High, 0 Medium → pass gate `fail-on: medium` |
 
 > **📸 CHỤP HÌNH 6:** GitHub Actions tab hiển thị run đầu tiên **RED** (baseline vulnerable) — thấy rõ commit SHA, trạng thái failed, và log Slither báo Medium/High.
 
@@ -260,8 +260,8 @@ Khi đổi `msg.sender` → `tx.origin` trong `onlyOwner`, **mọi hàm protecte
 
 | Phase | Commit SHA | Run URL | Kết quả |
 |---|---|---|---|
-| Mutation | `<ĐIỀN_SHA_COMMIT_3>` | `<ĐIỀN_URL_RUN_3>` | **RED** |
-| Revert mutation | `<ĐIỀN_SHA_COMMIT_4>` | `<ĐIỀN_URL_RUN_4>` | **GREEN** |
+| Mutation | `2d8321b` | `📸 ĐIỀN URL RUN 3` | **RED** |
+| Revert mutation | `5572b8b` | `📸 ĐIỀN URL RUN 4` | **GREEN** |
 
 > **📸 CHỤP HÌNH 9:** GitHub Actions tab hiển thị run **RED** sau mutation — log Slither báo `tx-origin` ở modifier `onlyOwner`.
 
