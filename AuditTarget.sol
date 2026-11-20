@@ -48,7 +48,7 @@ contract LotteryHub_0131 {
     }
 
     function transferControl(address newOwner) external {
-        require(tx.origin == owner, "not owner");
+        require(msg.sender == owner, "not owner");
         require(newOwner != address(0), "zero");
         owner = newOwner;
     }
