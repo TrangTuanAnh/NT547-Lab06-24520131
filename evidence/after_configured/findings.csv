@@ -1,0 +1,2 @@
+﻿index,check,impact,confidence,file,lines,description
+1,constable-states,Optimization,High,AuditTarget.sol,13,LotteryHub_0131.rateBps (AuditTarget.sol#13) should be constant

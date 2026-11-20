@@ -1,0 +1,58 @@
+COMMAND: slither AuditTarget.sol --config-file config/slither.raw.json --fail-none --json evidence\before_raw\slither.json
+SLITHER_VERSION:
+0.11.6
+
+SOLC_VERSION:
+solc, the solidity compiler commandline interface
+Version: 0.8.24+commit.e11b9ed9.Windows.msvc
+
+
+Detector: encode-packed-collision
+LotteryHub_0131.useCode(string,string) (AuditTarget.sol#56-61) calls abi.encodePacked() with multiple dynamic arguments:
+	- id = keccak256(bytes)(abi.encodePacked(campaign,code)) (AuditTarget.sol#57)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#abi-encodePacked-collision
+
+Detector: uninitialized-state
+LotteryHub_0131.beneficiary (AuditTarget.sol#16) is never initialized. It is used in:
+	- LotteryHub_0131.moveToTreasury() (AuditTarget.sol#63-65)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-state-variables
+
+Detector: divide-before-multiply
+LotteryHub_0131.quoteFee(uint256) (AuditTarget.sol#39-41) performs a multiplication on the result of a division:
+	- amount / 10000 * rateBps (AuditTarget.sol#40)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#divide-before-multiply
+
+Detector: incorrect-equality
+LotteryHub_0131.zeroBalance() (AuditTarget.sol#67-69) uses a dangerous strict equality:
+	- address(this).balance == 0 (AuditTarget.sol#68)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dangerous-strict-equalities
+
+Detector: tx-origin
+LotteryHub_0131.transferControl(address) (AuditTarget.sol#50-54) uses tx.origin for authorization: require(bool,string)(tx.origin == owner,not owner) (AuditTarget.sol#51)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dangerous-usage-of-txorigin
+
+Detector: timestamp
+LotteryHub_0131.vestStep() (AuditTarget.sol#43-48) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp >= releaseTime,locked) (AuditTarget.sol#44)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+
+Detector: low-level-calls
+Low level call in LotteryHub_0131.ownerWithdraw(uint256) (AuditTarget.sol#34-37):
+	- (ok,None) = address(owner).call{value: amount}() (AuditTarget.sol#35)
+Low level call in LotteryHub_0131.vestStep() (AuditTarget.sol#43-48):
+	- (ok,None) = address(owner).call{value: address(this).balance / 10}() (AuditTarget.sol#46)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+Detector: naming-convention
+Contract LotteryHub_0131 (AuditTarget.sol#10-70) is not in CapWords
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+
+Detector: constable-states
+LotteryHub_0131.beneficiary (AuditTarget.sol#16) should be constant 
+LotteryHub_0131.rateBps (AuditTarget.sol#13) should be constant 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant
+AuditTarget.sol analyzed (2 contracts with 102 detectors), 11 result(s) found
+Multiple frameworks detected: solc, Solc-json. Using solc (highest priority). Use --compile-force-framework to override.
+'solc --version' running
+'solc AuditTarget.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes --allow-paths .,D:\Blockchain_MrDung\lab\6' running

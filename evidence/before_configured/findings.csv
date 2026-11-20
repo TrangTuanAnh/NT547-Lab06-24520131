@@ -1,0 +1,8 @@
+﻿index,check,impact,confidence,file,lines,description
+1,encode-packed-collision,High,High,AuditTarget.sol,"56,57,58,59,60,61; 57","LotteryHub_0131.useCode(string,string) (AuditTarget.sol#56-61) calls abi.encodePacked() with multiple dynamic arguments: 	- id = keccak256(bytes)(abi.encodePacked(campaign,code)) (AuditTarget.sol#57)"
+2,uninitialized-state,High,High,AuditTarget.sol,"16; 63,64,65",LotteryHub_0131.beneficiary (AuditTarget.sol#16) is never initialized. It is used in: 	- LotteryHub_0131.moveToTreasury() (AuditTarget.sol#63-65)
+3,divide-before-multiply,Medium,Medium,AuditTarget.sol,"39,40,41; 40",LotteryHub_0131.quoteFee(uint256) (AuditTarget.sol#39-41) performs a multiplication on the result of a division: 	- amount / 10000 * rateBps (AuditTarget.sol#40)
+4,incorrect-equality,Medium,High,AuditTarget.sol,"67,68,69; 68",LotteryHub_0131.zeroBalance() (AuditTarget.sol#67-69) uses a dangerous strict equality: 	- address(this).balance == 0 (AuditTarget.sol#68)
+5,tx-origin,Medium,Medium,AuditTarget.sol,"50,51,52,53,54; 51","LotteryHub_0131.transferControl(address) (AuditTarget.sol#50-54) uses tx.origin for authorization: require(bool,string)(tx.origin == owner,not owner) (AuditTarget.sol#51)"
+6,constable-states,Optimization,High,AuditTarget.sol,16,LotteryHub_0131.beneficiary (AuditTarget.sol#16) should be constant
+7,constable-states,Optimization,High,AuditTarget.sol,13,LotteryHub_0131.rateBps (AuditTarget.sol#13) should be constant
