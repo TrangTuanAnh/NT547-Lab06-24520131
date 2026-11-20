@@ -1,6 +1,6 @@
 # NT547 - LAB 06 - BÁO CÁO
 
-**MSSV:** 24520131  | **Họ tên:** Trần Tuấn Anh | **Lớp:** NT547
+**MSSV:** 24520131  | **Họ tên:** Trang Tuấn Anh | **Lớp:** NT547.R11.ANTT
 **Session code tự sinh:** SC-3EE792 | **Tên contract:** LotteryHub_0131
 **Solidity / Slither:** 0.8.24 / 0.11.6 | **Ngày hoàn thành:** 2026-11-20
 **URL GitHub repository:** `<ĐIỀN_URL_REPO_GITHUB_CỦA_BẠN>`

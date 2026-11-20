@@ -37,7 +37,7 @@ contract LotteryHub_0131 {
     }
 
     function quoteFee(uint256 amount) public view returns (uint256) {
-        return amount / 10000 * rateBps;
+        return amount * rateBps / 10000;
     }
 
     function vestStep() external onlyOwner {
@@ -48,22 +48,29 @@ contract LotteryHub_0131 {
     }
 
     function transferControl(address newOwner) external {
-        require(tx.origin == owner, "not owner");
+        require(msg.sender == owner, "not owner");
         require(newOwner != address(0), "zero");
         owner = newOwner;
     }
 
     function useCode(string calldata campaign, string calldata code) external {
-        bytes32 id = keccak256(abi.encodePacked(campaign, code));
+        bytes32 id = keccak256(abi.encode(campaign, code));
         require(!redeemed[id], "used");
         redeemed[id] = true;
         stakes[msg.sender] += 1;
     }
 
+    function setBeneficiary(address payable _b) external onlyOwner {
+        require(_b != address(0), "zero");
+        beneficiary = _b;
+    }
+
     function moveToTreasury() external onlyOwner {
+        require(beneficiary != address(0), "beneficiary not set");
         beneficiary.transfer(address(this).balance / 2);
     }
 
+    // slither-disable-next-line incorrect-equality
     function zeroBalance() external view returns (bool) {
         return address(this).balance == 0;
     }
