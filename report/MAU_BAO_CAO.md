@@ -212,8 +212,8 @@ StudentAsset → BalanceLedger  [label="2"]
 
 | Phase | Commit (full/short SHA) | Run URL | Kết quả | Detector khiến RED / lý do GREEN |
 |---|---|---|---|---|
-| Baseline vulnerable | `f120d18` | `📸 ĐIỀN URL RUN 1` | **RED** | `encode-packed-collision` (High), `uninitialized-state` (High), `divide-before-multiply` (Medium), `incorrect-equality` (Medium), `tx-origin` (Medium) |
-| Patched | `ee5caa8` | `📸 ĐIỀN URL RUN 2` | **GREEN** | Đã sửa 4 TP (tx-origin, encode-packed, divide-before-multiply, uninitialized-state) + suppress incorrect-equality → 0 High, 0 Medium → pass gate `fail-on: medium` |
+| Baseline vulnerable | `f120d18` | [Run #1](https://github.com/TrangTuanAnh/NT547-Lab06-24520131/actions/runs/44649883122) | **RED** | `encode-packed-collision` (High), `uninitialized-state` (High), `divide-before-multiply` (Medium), `incorrect-equality` (Medium), `tx-origin` (Medium) |
+| Patched | `ee5caa8` | [Run #2](https://github.com/TrangTuanAnh/NT547-Lab06-24520131/actions/runs/44649953865) | **GREEN** | Đã sửa 4 TP (tx-origin, encode-packed, divide-before-multiply, uninitialized-state) + suppress incorrect-equality → 0 High, 0 Medium → pass gate `fail-on: medium` |
 
 > **📸 CHỤP HÌNH 6:** GitHub Actions tab hiển thị run đầu tiên **RED** (baseline vulnerable) — thấy rõ commit SHA, trạng thái failed, và log Slither báo Medium/High.
 
@@ -262,8 +262,8 @@ Khi đổi `msg.sender` → `tx.origin` trong `onlyOwner`, **mọi hàm protecte
 
 | Phase | Commit SHA | Run URL | Kết quả |
 |---|---|---|---|
-| Mutation | `6e0eb6d` | `📸 ĐIỀN URL RUN 3` | **RED** |
-| Revert mutation | `027c20a` | `📸 ĐIỀN URL RUN 4` | **GREEN** |
+| Mutation | `6e0eb6d` | [Run #6](https://github.com/TrangTuanAnh/NT547-Lab06-24520131/actions/runs/44651446541) | **RED** |
+| Revert mutation | `027c20a` | [Run #7](https://github.com/TrangTuanAnh/NT547-Lab06-24520131/actions/runs/44651470694) | **GREEN** |
 
 > **📸 CHỤP HÌNH 9:** GitHub Actions tab hiển thị run **RED** sau mutation — log Slither báo `tx-origin` ở modifier `onlyOwner`.
 
