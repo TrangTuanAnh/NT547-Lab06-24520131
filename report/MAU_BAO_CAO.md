@@ -11,10 +11,10 @@
 
 ### 1.1. Môi trường và lệnh chạy
 
-```
-python tools/create_lab.py 24520131
-python tools/scan.py --mode raw --tag before
-python tools/scan.py --mode configured --tag before
+```bash
+python3 tools/create_lab.py 24520131
+python3 tools/scan.py --mode raw --tag before
+python3 tools/scan.py --mode configured --tag before
 ```
 
 > **📸 CHỤP HÌNH 1:** Terminal hiển thị kết quả chạy `create_lab.py` (thấy Session Code SC-3EE792 và tên contract LotteryHub_0131).
@@ -165,7 +165,7 @@ Slither phân loại Medium vì so sánh `address(this).balance == 0` có thể 
 ### 3.1. Lệnh printer đã chạy
 
 ```
-python tools/print_arch.py
+python3 tools/print_arch.py
 ```
 
 Output: `evidence/architecture/human_summary.txt`, `evidence/architecture/ArchitectureDemo.sol.dot`.
