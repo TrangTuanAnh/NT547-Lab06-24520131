@@ -239,12 +239,14 @@ StudentAsset → BalanceLedger  [label="2"]
 
 ### 5.1. Mutation một dòng
 
-Trong `AuditTarget.sol`, bên trong `modifier onlyOwner()`:
+Trong `AuditTarget.sol`, hàm `transferControl()` — đổi duy nhất một dòng kiểm tra quyền:
 
 - **Từ:** `require(msg.sender == owner, "not owner");`
 - **Thành:** `require(tx.origin == owner, "not owner");`
 
 **Detector kỳ vọng:** `tx-origin` (mức Medium). Khi CI chạy với `fail-on: medium`, finding này làm job **RED**.
+
+> Lưu ý: Slither 0.11.6 detect `tx.origin` trong function body nhưng không detect trong modifier body, do đó mutation được đặt ở hàm `transferControl()` thay vì modifier `onlyOwner()`.
 
 ### 5.2. Giải thích sự thay đổi về nguồn định danh / authorization
 
@@ -260,8 +262,8 @@ Khi đổi `msg.sender` → `tx.origin` trong `onlyOwner`, **mọi hàm protecte
 
 | Phase | Commit SHA | Run URL | Kết quả |
 |---|---|---|---|
-| Mutation | `2d8321b` | `📸 ĐIỀN URL RUN 3` | **RED** |
-| Revert mutation | `5572b8b` | `📸 ĐIỀN URL RUN 4` | **GREEN** |
+| Mutation | `6e0eb6d` | `📸 ĐIỀN URL RUN 3` | **RED** |
+| Revert mutation | `027c20a` | `📸 ĐIỀN URL RUN 4` | **GREEN** |
 
 > **📸 CHỤP HÌNH 9:** GitHub Actions tab hiển thị run **RED** sau mutation — log Slither báo `tx-origin` ở modifier `onlyOwner`.
 
@@ -270,9 +272,9 @@ Khi đổi `msg.sender` → `tx.origin` trong `onlyOwner`, **mọi hàm protecte
 ### 5.4. Lệnh mutation và revert
 
 ```bash
-# Mutation (đổi msg.sender → tx.origin trong modifier onlyOwner)
+# Mutation (đổi msg.sender → tx.origin trong hàm transferControl)
 git add AuditTarget.sol
-git commit -m "lab06: one-line mutation tx-origin"
+git commit -m "lab06: mutation tx-origin in transferControl"
 git push
 
 # Sau khi xác nhận RED, revert:
